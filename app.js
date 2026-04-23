@@ -3,7 +3,7 @@ import "dotenv/config";
 import mongoDb from "./controller/mongoDb.js";
 import helmet from "helmet";
 import rateLimitForLogin from "./secureLayer/rateLimitsforLogin.js";
-
+import cors from "cors";
 import authRouter from "./router/authRouter.js";
 import postRouter from "./router/postRouter.js";
 import { jwtVerify } from "./middleware/accessController.js";
