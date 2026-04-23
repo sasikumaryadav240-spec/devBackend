@@ -20,6 +20,12 @@ app.use(helmet());
 
 app.use(rateLimitForLogin);
 
+app.use(cors({
+  origin: 'http://localhost:5173', // Your frontend address
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true
+}));
+
 mongoDb();
 
 app.use(express.json()); 
