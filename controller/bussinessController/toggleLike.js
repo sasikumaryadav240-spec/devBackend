@@ -1,3 +1,5 @@
+import postModel from "../../Model/post.js";
+
 export const toggleLike = async (req, res) => {
     try {
         const postId = req.params.id;
