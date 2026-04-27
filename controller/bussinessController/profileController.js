@@ -22,7 +22,7 @@ export const updateProfile = async (req, res) => {
             {_id : Id},
             req.body,
             {new: true}
-        );
+        ).select("-password");
 
         if(!user) return res.status(404).json("No User Data Found");
 

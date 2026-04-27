@@ -1,4 +1,5 @@
 import postModel from "../../Model/post.js";
+import User from "../../Model/user.js";
 
 export const getProfilePosts = async (req, res) => {
     const Id = req.userId;
@@ -8,7 +9,13 @@ export const getProfilePosts = async (req, res) => {
 
         if(!posts) return res.status(404).json("No Posts");
 
-        res.status(200).json({posts});
+        const profile = await User.find({_id : Id}).select("-password");
+        const postsData = posts.map((p) => ({
+            ...posts._doc,
+            Author : profile
+        }));
+
+        res.status(200).json({postsData});
     } catch (error) {
         res.status(500).json(error.message);
     }
@@ -17,6 +24,7 @@ export const getProfilePosts = async (req, res) => {
 export const getAllPosts = async (req, res) => {
     try {
         const posts = await postModel.find({})
+                      .populate("userId", "-password")
                       .sort({ createdAt : -1 });
 
         if(!posts) return res.status(404).json("No Posts Available");
