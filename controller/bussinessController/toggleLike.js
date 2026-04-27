@@ -5,18 +5,22 @@ export const toggleLike = async (req, res) => {
         const postId = req.params.id;
         const userId = req.userId;
 
-        const post = await postModel.find({_id : postId});
+        const post = await postModel.findById(postId);
+        
         if (!post) return res.status(404).json("Post not found");
-        const index = post.likes.find((id) => id.toString() === String(userId));
 
-        if (index === -1) {
+        if (!post.likes) post.likes = [];
+
+        const isLiked = post.likes.some((id) => id.toString() === String(userId));
+
+        if (!isLiked) {
             post.likes.push(userId);
         } else {
             post.likes = post.likes.filter((id) => id.toString() !== String(userId));
         }
-
-        const updatedPost = await postModel.findByIdAndUpdate(postId, post, { new: true });
-        res.status(200).json(updatedPost);
+        await post.save();
+        
+        res.status(200).json(post);
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
