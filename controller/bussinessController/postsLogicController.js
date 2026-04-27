@@ -11,7 +11,7 @@ export const getProfilePosts = async (req, res) => {
 
         const profile = await User.find({_id : Id}).select("-password");
         const postsData = posts.map((p) => ({
-            ...posts._doc,
+            ...p._doc,
             Author : profile
         }));
 
