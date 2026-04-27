@@ -8,8 +8,10 @@ export const toggleLike = async (req, res) => {
         const post = await postModel.findById(postId);
         
         if (!post) return res.status(404).json("Post not found");
-
-        if (!post.likes) post.likes = [];
+        
+        if (!Array.isArray(post.likes)) {
+            post.likes = [];
+        }
 
         const isLiked = post.likes.some((id) => id.toString() === String(userId));
 
