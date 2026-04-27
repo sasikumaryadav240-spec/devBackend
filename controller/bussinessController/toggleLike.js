@@ -5,9 +5,9 @@ export const toggleLike = async (req, res) => {
         const postId = req.params.id;
         const userId = req.userId;
 
-        const post = await postModel.findById(postId);
+        const post = await postModel.find({_id : postId});
         if (!post) return res.status(404).json("Post not found");
-        const index = post.likes.findIndex((id) => id.toString() === String(userId));
+        const index = post.likes.find((id) => id.toString() === String(userId));
 
         if (index === -1) {
             post.likes.push(userId);
