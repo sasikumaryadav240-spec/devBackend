@@ -2,11 +2,13 @@ import mongoose from "mongoose";
 
 const commentModel = mongoose.Schema({
     postId : {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "postModel",
         required: true
     },
     userId : {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
         required: true
     },
     comment: {
