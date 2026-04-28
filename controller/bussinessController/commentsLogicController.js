@@ -1,4 +1,6 @@
 import commentsModel from "../../Model/comment.js";
+import postModel from "../../Model/post.js";
+import User from "../../Model/user.js"
 
 export const commentsperPosts = async (req, res) => {
     try {
