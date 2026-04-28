@@ -1,5 +1,6 @@
 import User from "../../Model/user.js";
 import postModel from  "../../Model/post.js";
+import followModel from "../../Model/follow.js";
 
 export const getAllUsers = async (req, res) => {
     try {
@@ -16,46 +17,46 @@ export const getAllUsers = async (req, res) => {
 }
 
 export const getTopContributors = async (req, res) => {
-  try {
-    const topUsers = await postModel.aggregate([
-      {
-        $group: {
-          _id: "$userId",
-          totalPosts: { $sum: 1 }
-        }
-      },
-      {
-        $sort: { totalPosts: -1 }
-      },
-      {
-        $limit: 5
-      },
-      {
-        $lookup: {
-          from: "users",
-          localField: "_id",
-          foreignField: "_id",
-          as: "user"
-        }
-      },
-      {
-        $unwind: "$user"
-      },
-      {
-        $project: {
-          _id: "$user._id",
-          name: "$user.name",
-          role: "$user.role",
-          totalPosts: 1
-        }
-      }
-    ]);
+    try {
+        const topUsers = await postModel.aggregate([
+            {
+                $group: {
+                _id: "$userId",
+                totalPosts: { $sum: 1 }
+                }
+            },
+            {
+                $sort: { totalPosts: -1 }
+            },
+            {
+                $limit: 5
+            },
+            {
+                $lookup: {
+                from: "userCollection", // 🔥 FIXED
+                localField: "_id",
+                foreignField: "_id",
+                as: "user"
+                }
+            },
+            {
+                $unwind: "$user"
+            },
+            {
+                $project: {
+                _id: "$user._id",
+                name: "$user.name",
+                role: "$user.role",
+                totalPosts: 1
+                }
+            }
+            ]);
 
-    res.json(topUsers);
-  } catch (err) {
-    res.status(500).json(err.message);
-  }
-};
+            res.status(200).json(topUsers);
+    } catch (error) {
+        res.status(500).json(error);
+    }
+}
 
 export const getSuggestedUsers = async (req, res) => {
   try {
