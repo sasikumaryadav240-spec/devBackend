@@ -1,4 +1,3 @@
-import { number } from "joi";
 import mongoose from "mongoose";
 
 const post = new mongoose.Schema({
@@ -7,19 +6,22 @@ const post = new mongoose.Schema({
         required: true,
         ref: 'User'
     },
-    header : {
+    header: {
         type: String,
-        minlength : 5,
-        maxlength : 100,
+        minlength: 5,
+        maxlength: 100,
         required: true,
+        trim: true
     },
-    idea : {
+    idea: {
         type: String,
         minlength: 20,
-        required: true
+        required: true,
+        trim: true
     },
     likes : {
-        type : number,
+        type : Number,
+        default: 0
     }
 },{
     timestamps: true,

@@ -7,10 +7,6 @@ export const createPost = async (req, res) => {
     try {
         const { header, idea } = req.body;
 
-        const { error } = postValidate.validate(req.body);
-
-        if(error) return res.status(400).json({ Error : error.details[0].message});
-
         const post = await postModel.create({
             userId : Id,
             header,
@@ -27,10 +23,6 @@ export const createPost = async (req, res) => {
 export const updatePost = async (req, res) => {
     try {
         const { header, idea, likes} = req.body;
-
-        const { error } = postValidate.validate(req.body);
-
-        if(error) return res.status(400).json({ Error : error.details[0].message});
 
         const updatePost = await postModel.findOneAndUpdate(
             { _id: req.params.id }, 
