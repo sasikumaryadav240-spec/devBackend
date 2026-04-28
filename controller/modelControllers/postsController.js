@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 import postModel from "../../Model/post.js";
-import { postValidate } from "../../secureLayer/postValidate.js";
 
 export const createPost = async (req, res) => {
     const Id = req.userId;
