@@ -20,6 +20,19 @@ export const follersPosts = async (req, res) => {
     }
 }
 
+export const follwersList = async (req, res) => {
+    const Id = req.userId;
+    try {
+        const getUserIds = await followModel.find({ followerId : Id });
+
+        const getAllId = getUserIds.map(p => p.followedId);
+
+        res.status(200).json({getAllId});
+    } catch (error) {
+        res.status(500).json(error.message);
+    }
+}
+
 export const followersCount = async (req, res) => {
     const Id = req.userId;
     try {
