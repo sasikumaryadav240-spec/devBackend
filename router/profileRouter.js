@@ -5,7 +5,7 @@ import { getAllUsers, getTopContributors, getSuggestedUsers } from "../controlle
 
 router.get("/profile", getProfile);
 router.put("/profile/:id", updateProfile);
-router.delete("/profile/:id", deleteProfile);
+router.delete("/profile", deleteProfile);
 router.get("/getAllUsers", getAllUsers);
 router.get("/getTopContributers", getTopContributors);
 router.get("/getSuggestions", getSuggestedUsers);
