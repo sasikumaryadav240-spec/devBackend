@@ -29,8 +29,6 @@ export const followersCount = async (req, res) => {
 
         const lengthOfCount = getAllId.length;
 
-        if(lengthOfCount === 0) return res.status(404).json("No Following Accounts posts Found");
-
         res.status(200).json(lengthOfCount);
     } catch (error) {
         res.status(500).json(error.message);

@@ -21,7 +21,7 @@ app.use(helmet());
 app.use(rateLimitForLogin);
 
 app.use(cors({
-  origin: 'http://localhost:5173', // Your frontend address
+  origin: 'http://localhost:5173',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
 }));

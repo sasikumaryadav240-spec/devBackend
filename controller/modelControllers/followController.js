@@ -3,11 +3,9 @@ import followModel from "../../Model/follow.js";
 export const addFollowRequest = async (req, res) => {
     const Id = req.userId;
     try {
-        const { followedId } = req.body;
-
         const follower = await followModel.create({
             followerId : Id,
-            followedId : followedId
+            followedId : req.params.Id
         });
 
         if(!follower) return res.status(403).json("Follow Request Not Created");
