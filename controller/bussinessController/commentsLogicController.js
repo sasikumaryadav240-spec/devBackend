@@ -3,6 +3,8 @@ import commentsModel from "../../Model/comment.js";
 export const commentsperPosts = async (req, res) => {
     try {
         const comments = await commentsModel.find({postId : req.params.id})
+                         .populate("userId", "-password")
+                         .populate("postId")
                          .sort({ createdAt : -1 });
         if(!comments) return res.status(404).json("No Comments yet!");
 
