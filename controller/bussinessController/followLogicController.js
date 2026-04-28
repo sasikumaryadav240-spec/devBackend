@@ -10,7 +10,7 @@ export const follersPosts = async (req, res) => {
 
         const posts = await postModel.find({
             userId : { $in : getAllId }
-        }).sort({ createdAt : -1 });
+        }).sort({ createdAt : -1 }).populate("userId", "name role createdAt");
 
         if(!posts) return res.status(404).json("No Following Accounts posts Found");
 
