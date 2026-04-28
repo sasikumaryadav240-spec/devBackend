@@ -3,9 +3,10 @@ import { commentVadilate } from "../../secureLayer/commentValidate.js";
 
 export const createComment = async (req, res) => {
     const Id = req.userId;
+    const postId = req.params;
 
     try {
-        const { postId, comment } = req.body;
+        const { comment } = req.body;
 
         const { error } = commentVadilate.validate(req.body);
 
