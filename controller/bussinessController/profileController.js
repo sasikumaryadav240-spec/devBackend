@@ -1,3 +1,4 @@
+import postModel from "../../Model/post.js";
 import User from "../../Model/user.js";
 
 export const getProfile = async (req, res) => {
@@ -38,6 +39,15 @@ export const updateProfile = async (req, res) => {
 export const deleteProfile = async (req, res) => {
     const Id = req.userId;
     try {
+        const deletePosts = await postModel.deleteMany({userId : Id});
+
+        await followModel.deleteMany({
+            $or: [
+                { followerId: Id },
+                { followedId: Id }
+            ]
+        });
+
         const user = await User.findOneAndDelete({_id : Id});
 
         if(!user) return res.status(404).json("No User Data Found");
