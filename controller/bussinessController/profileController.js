@@ -1,5 +1,6 @@
 import postModel from "../../Model/post.js";
 import User from "../../Model/user.js";
+import followModel from "../../Model/follow.js";
 
 export const getProfile = async (req, res) => {
     const Id = req.userId;
