@@ -1,4 +1,4 @@
-import postModel from "../../Model/post";
+import postModel from "../../Model/post.js";
 
 export const toggleLike = async (req, res) => {
   const userId = req.userId;
