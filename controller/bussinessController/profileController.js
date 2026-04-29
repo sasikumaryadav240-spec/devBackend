@@ -48,7 +48,7 @@ export const deleteProfile = async (req, res) => {
             ]
         });
 
-        const user = await User.findOneAndDelete({_id : Id});
+        const user = await User.findByIdAndDelete(Id);
 
         if(!user) return res.status(404).json("No User Data Found");
 
