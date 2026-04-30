@@ -21,7 +21,10 @@ app.use(helmet());
 app.use(rateLimitForLogin);
 
 app.use(cors({
-  origin: 'http://localhost:5173',
+  origin: [
+    'http://localhost:5173',
+    "https://project-enms6-bt8e1qynw-shasi-kumar-s-projects.vercel.app"
+  ],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
 }));
