@@ -23,7 +23,7 @@ app.use(rateLimitForLogin);
 app.use(cors({
   origin: [
     'http://localhost:5173',
-    "https://project-enms6-bt8e1qynw-shasi-kumar-s-projects.vercel.app"
+    "https://project-enms6.vercel.app"
   ],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
